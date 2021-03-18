@@ -21,7 +21,7 @@
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('get_recipes') }}">Home</a></li>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Home</a></li>
@@ -32,18 +32,32 @@
         <ul class="sidenav" id="mobile-demo">
                     <li><h4 class="center-align">cogi</h4></li>
                     <li><a href="{{ url_for('get_recipes') }}">Home</a></li>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Home</a></li>
         </ul>
 
-
-
     </header>
     
-    {% block content %}
-    {% endblock %}
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <section>
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="row">
+                        <h2 class="center-align">{{ message }}</h2>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </section>
+
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" 
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
