@@ -2,15 +2,15 @@
 
     {% block content %}
 
-    <h3 class="center-align">Registration</h3>
+    <h3 class="center-align">Log in</h3>
 
     <div class="row">
-        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register' )}}">
+        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('login') }}">
             <div class="card-panel">
                 <!-- Username field -->
                 <div class="row">
                     <div class="input-field col s12">
-                        <i class="fas fa-user-plus prefix"></i>
+                        <i class="fas fa-user-cog prefix"></i>
                         <input id="username" name="username" type="text" class="validate" 
                             minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" required>
                         <label for="username">Username</label>
@@ -25,10 +25,10 @@
                         <label for="password">Password</label>
                     </div>
                 </div>
-                <!-- Registration button -->
+                <!-- Log in button -->
                 <div class="row">
                     <button type="submit" class="col s12 btn-large">
-                        Register <i class="fas fa-sign-in-alt"></i>
+                        Log in <i class="fas fa-sign-in-alt"></i>
                     </button>
                 </div>
             </div>
@@ -37,8 +37,8 @@
 
     <div class="row">
         <div class="col s12">
-            <p class="center-align">Already have an account?
-            <a href="{{ url_for('login') }}">Log in here</a></p>
+            <p class="center-align">New here?
+            <a href="{{ url_for('register') }}">Set up an account</a></p>
         </div>
     </div>
 
