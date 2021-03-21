@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3 class="center-align">Update recipe</h3>
+
+    <div class="row">
+        <form class="col s12" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
+            <!-- Recipe name input -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-utensils prefix"></i>
+                    <input id="recipe_name" name="recipe_name" type="text" 
+                        value="{{ recipe.recipe_name }}" minlength="5" maxlength="50" class="validate" required>
+                    <label for="recipe_name">Recipe name</label>
+                </div>
+            </div>
+            <!-- Ingredients -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-pepper-hot prefix"></i>
+                    <textarea id="ingredients" class="materialize-textarea" name="ingredients" rows="16" cols="40" required>
+                        {{- recipe.ingredients -}}
+                    </textarea>
+                    <label for="ingredients">Ingredients</label>
+                </div>
+            </div>
+            <!-- Method text field -->
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="fas fa-align-left prefix"></i>
+                    <textarea id="method" class="materialize-textarea" name="method" rows="16" cols="80" required>
+                        {{- recipe.method -}}
+                    </textarea>
+                    <label for="method">Method</label>
+                </div>
+            </div>
+            <!-- Time for cooking prep range selector -->
+            <div class="row">
+                <p class="range-field col s12">
+                <input type="range" id="prep_time" name="prep_time" min="5" max="300" required/>
+                <label for="prep_time">Prep time (minutes)</label>
+                </p>
+            </div>
+            <!-- Recipe type tags -->
+            <div class="row">
+                <div class="chips chips-placeholder col s12">
+                    <input class="custom-class">
+                </div>
+            </div>
+            <!-- Submit button to update recipe -->
+            <div class="row">
+                <div class="col s12 center-align">
+                    <!-- Cancel update recipe button -->
+                    <a href="{{ url_for('get_recipes') }}" class="btn-large red">
+                        Cancel <i class="fas fa-times right"></i>
+                    </a>
+                    <button class="btn waves-effect waves-light" type="submit">Update recipe
+                        <i class="fas fa-edit right"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    
+        
+{% endblock %}
