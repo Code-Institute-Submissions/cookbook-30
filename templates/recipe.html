@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+    {% block content %}
+
+        <h1 class="center-align">{{ recipe.title }}</h1>
+
+        <div class="row">
+            <!-- Placeholder for image -->
+            <div class="col-s12">
+                <h3>Ingredients</h3>
+                <p style="white-space: pre-wrap;">{{ recipe.ingredients }}</p>
+            </div>
+        </div>
+
+        <h3>Method</h3>
+        <p style="white-space: pre-wrap;">{{ recipe.method }}</p>
+        <p>Recipe submitted by: {{ recipe.created_by }}</p>
+
+        {% if session.user|lower == recipe.created_by|lower %}
+            <div class="row">
+                <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="btn">Edit Recipe</a>
+                <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn">Delete Recipe</a>
+            </div>
+        {% endif %}
+
+    {% endblock %}
