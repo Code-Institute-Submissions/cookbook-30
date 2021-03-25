@@ -108,25 +108,26 @@ def logout():
 
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
+    try:
+        username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
+        if session["user"]:
 
-    if session["user"]:
+            if request.method == "POST":
+                recipe = {
+                    "recipe_name": request.form.get("recipe_name"),
+                    "ingredients": request.form.get("ingredients"),
+                    "method": request.form.get("method"),
+                    "created_by": session["user"]
+                }
+                mongo.db.recipes.insert_one(recipe)
+                flash("Recipe successfully created")
+                return redirect(url_for("get_recipes"))
+            return render_template("add_recipe.html", username=username)
 
-        if request.method == "POST":
-            recipe = {
-                "recipe_name": request.form.get("recipe_name"),
-                "ingredients": request.form.get("ingredients"),
-                "method": request.form.get("method"),
-                "created_by": session["user"]
-            }
-            mongo.db.recipes.insert_one(recipe)
-            flash("Recipe successfully created")
-            return redirect(url_for("get_recipes"))
-        return render_template("add_recipe.html", username=username)
-
-    flash("Please register to start adding recipes")
-    return render_template("register.html")
+    except:
+        flash("Please register to start adding recipes")
+        return render_template("register.html")
 
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
