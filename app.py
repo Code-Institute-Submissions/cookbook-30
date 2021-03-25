@@ -89,8 +89,11 @@ def profile(username):
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
 
+    recipes = list(mongo.db.recipes.find())
+
     if session["user"]:
-        return render_template("profile.html", username=username)
+        return render_template(
+            "profile.html", username=username, recipes=recipes)
 
     return redirect(url_for("login"))
 
@@ -105,17 +108,25 @@ def logout():
 
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
-    if request.method == "POST":
-        recipe = {
-            "recipe_name": request.form.get("recipe_name"),
-            "ingredients": request.form.get("ingredients"),
-            "method": request.form.get("method"),
-            "created_by": session["user"]
-        }
-        mongo.db.recipes.insert_one(recipe)
-        flash("Recipe successfully created")
-        return redirect(url_for("get_recipes"))
-    return render_template("add_recipe.html")
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+
+    if session["user"]:
+
+        if request.method == "POST":
+            recipe = {
+                "recipe_name": request.form.get("recipe_name"),
+                "ingredients": request.form.get("ingredients"),
+                "method": request.form.get("method"),
+                "created_by": session["user"]
+            }
+            mongo.db.recipes.insert_one(recipe)
+            flash("Recipe successfully created")
+            return redirect(url_for("get_recipes"))
+        return render_template("add_recipe.html", username=username)
+
+    flash("Please register to start adding recipes")
+    return render_template("register.html")
 
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
@@ -131,7 +142,7 @@ def edit_recipe(recipe_id):
         flash("Recipe successfully updated")
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    return render_template("edit_recipe.html", recipe=recipe)
+    return redirect("edit_recipe.html", recipe=recipe)
 
 
 @app.route("/delete_recipe/<recipe_id>")
