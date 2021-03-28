@@ -34,12 +34,14 @@
                     <label for="method">Method</label>
                 </div>
             </div>
-            <!-- Time for cooking prep range selector -->
+            <!-- Time for cooking prep text field -->
             <div class="row">
-                <p class="range-field col s12">
-                <input type="range" id="prep_time" name="prep_time" min="5" max="300" required/>
-                <label for="prep_time">Prep time (minutes)</label>
-                </p>
+                <div class="input-field col s12">
+                    <textarea id="prep_time" class="materialize-textarea" name="prep_time" rows="1" required>
+                        {{- recipe.prep_time -}}
+                    </textarea>
+                    <label for="prep_time">Prep time (minutes)</label>
+                </div>
             </div>
             <!-- Recipe type tags -->
             <div class="row">

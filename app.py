@@ -5,6 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 if os.path.exists("env.py"):
     import env
 
@@ -29,6 +30,64 @@ def get_recipes():
 def recipe(recipe_id):
     show = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     return render_template("recipe.html", recipe=show)
+
+
+"""
+# Test comment function on recipe page
+@app.route("/recipe/<recipe_id>", methods=["GET", "POST"])
+def recipe(recipe_id):
+    try:
+        username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
+             if session["user"]:
+
+                if request.method == "POST":
+                    add comment to database
+                    publish = {
+                        "comments": request.form.get("comments")
+                    }
+                    mongo.db.recipes.insert_one(publish)
+
+        #     show = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        #     return render_template("recipe.html", recipe=show, username=username)
+
+        #   show = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+#           return render_template("recipe.html", recipe=show, username=username)
+
+    #   except:
+    #       flash("Please register to add comments")
+    #       return render_template("register.html")
+
+#   show = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+#   return render_template("recipe.html", recipe=show, username=username)
+"""
+
+""" or publish comment and storing in own comments collection in DB
+@app.route("add_comment/<comments_id>", methods =["GET", "POST"])
+def add_comment(comments_id):
+    try:
+        username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
+
+        recipes = list(mongo.db.recipes.find())
+
+        if session["user"]:
+            if request.method == "POST":
+                # actually insert the comment
+                        comment = {
+                            'recipe_id': recipe_id,
+                            'created_by': session["user"],
+                            'text': request.form.get(comment_text),
+                            'posted': datetime.now(
+                                        "%d-%b-%Y (%H:%M)") }
+                        mongo.db.comments.insert_one()
+                        flash("Thank you, comment successfully published")
+                        return redirect(url_for("recipe"))
+
+    except:
+        flash("Please register to add comments")
+        return render_template("register.html", username=username, recipes=recipes)
+"""
 
 
 @app.route("/register", methods =["GET", "POST"])
@@ -118,6 +177,7 @@ def add_recipe():
                     "recipe_name": request.form.get("recipe_name"),
                     "ingredients": request.form.get("ingredients"),
                     "method": request.form.get("method"),
+                    "prep_time": request.form.get("prep_time"),
                     "created_by": session["user"]
                 }
                 mongo.db.recipes.insert_one(recipe)
@@ -137,13 +197,14 @@ def edit_recipe(recipe_id):
             "recipe_name": request.form.get("recipe_name"),
             "ingredients": request.form.get("ingredients"),
             "method": request.form.get("method"),
+            "prep_time": request.form.get("prep_time"),
             "created_by": session["user"]
         }
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
         flash("Recipe successfully updated")
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    return redirect("edit_recipe.html", recipe=recipe)
+    return render_template("edit_recipe.html", recipe=recipe)
 
 
 @app.route("/delete_recipe/<recipe_id>")
