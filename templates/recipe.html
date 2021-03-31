@@ -25,19 +25,21 @@
             </div>
         {% endif %}
 
-        <!-- Comments 
-        <form class="center-align" method="POST" action=""">
-            <label for="comments">Comments</label>
-            <textarea id="comments" class="materialize-textarea" name="comments" rows="16"></textarea>
-            <a href="" class="btn waves-effect waves-light" type="submit">Publish</a>
-            {% for comment in comments %}
+
+        <form class="center-align" method="POST" action="{{ url_for('add_comment', r_id=recipe._id) }}">
+            <label for="comment">Comments</label>
+            <textarea id="comment" class="materialize-textarea" name="comment" rows="16"></textarea>
+            <button class="btn waves-effect waves-light" type="submit">Publish</button>
+        </form>
+
+        
+        {% for comment in comments %}
                 <div>
-                    {{ comments.text }}
-                    {{ comments.created_by }}
-                    {{ comments.posted }}
+                    {{ comment.comment }}
+                    {{ comment.created_by }}
+                    {{ comment.posted }}
                 </div>
-            {% endfor %} 
-            </form>      -->  
+        {% endfor %} 
 
 
     {% endblock %}
