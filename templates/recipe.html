@@ -3,6 +3,13 @@
     {% block content %}
 
         <h1 class="center-align">{{ recipe.title }}</h1>
+        
+        {% for tag in recipe.tags %}
+            <div class="chip">
+                {{ tag }}
+            </div>
+        {% endfor %}
+
 
         {{ recipe.prep_time }}
 
@@ -34,11 +41,11 @@
 
         
         {% for comment in comments %}
-                <div>
-                    {{ comment.comment }}
-                    {{ comment.created_by }}
-                    {{ comment.posted }}
-                </div>
+            <div>
+                {{ comment.comment }}
+                {{ comment.created_by }}
+                {{ comment.posted }}
+            </div>
         {% endfor %} 
 
 

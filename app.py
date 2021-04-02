@@ -117,13 +117,16 @@ def add_recipe():
         if session["user"]:
 
             if request.method == "POST":
+                print(request.form.get("tags"))
                 recipe = {
                     "recipe_name": request.form.get("recipe_name"),
                     "ingredients": request.form.get("ingredients"),
                     "method": request.form.get("method"),
                     "prep_time": request.form.get("prep_time"),
+                    "tags": request.form.get("tags").split(", "),
                     "created_by": session["user"]
                 }
+                print(request.form.get("tags").split(", "))
                 mongo.db.recipes.insert_one(recipe)
                 flash("Recipe successfully created")
                 return redirect(url_for("get_recipes"))
@@ -142,6 +145,7 @@ def edit_recipe(recipe_id):
             "ingredients": request.form.get("ingredients"),
             "method": request.form.get("method"),
             "prep_time": request.form.get("prep_time"),
+            "tags": request.form.get("tags").split(", "),
             "created_by": session["user"]
         }
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
@@ -191,7 +195,6 @@ def add_comment():
     except:
         flash("Please register or log in to add comments")
         return render_template("register.html")
-
 
 
 if __name__ == "__main__":
