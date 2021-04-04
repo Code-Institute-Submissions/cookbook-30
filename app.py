@@ -37,11 +37,10 @@ def search():
 def recipe(recipe_id):
     show = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     show_comments = list(mongo.db.comments.find({"recipe_id": recipe_id}))
-    return render_template("recipe.html",
-                            recipe=show, comments=show_comments)
+    return render_template("recipe.html", recipe=show, comments=show_comments)
 
 
-@app.route("/register", methods = ["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
         # check is username already exists in database
@@ -65,7 +64,7 @@ def register():
     return render_template("register.html")
 
 
-@app.route("/login", methods = ["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         # check if username already exists in database
@@ -93,7 +92,7 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/profile/<username>", methods = ["GET", "POST"])
+@app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     # get the session user's username from the database
     username = mongo.db.users.find_one(
@@ -159,9 +158,7 @@ def edit_recipe(recipe_id):
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
         flash("Recipe successfully updated")
 
-
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    #tags_string = list(recipe.get("tags").join("tags"))
     return render_template("edit_recipe.html", recipe=recipe)
 
 
@@ -173,37 +170,25 @@ def delete_recipe(recipe_id):
 
 
 # publish comment and storing in own comments collection in DB
-@app.route("/add_comment", methods=["GET", "POST"])
-def add_comment():
-    try:
+@app.route("/add_comment/<r_id>", methods=["GET", "POST"])
+def add_comment(r_id):
+    if "user" in session:
         if request.method == "POST":
+            username = mongo.db.users.find_one(
+                        {"username": session["user"]})["username"]
+            # insert the comment to the database
+            comment = {
+                'recipe_id': r_id,
+                'created_by': username,
+                'comment': request.form.get("comment"),
+                'posted': datetime.now(tz=None).strftime("%d-%b-%Y (%H:%M)")
+            }
+            mongo.db.comments.insert_one(comment)
+            flash("Thank you, comment successfully published")
+            return redirect(url_for("recipe", recipe_id=r_id))
 
-            if session["user"]:
-
-                username = mongo.db.users.find_one(
-                    {"username": session["user"]})["username"]
-
-                r_id = request.args.get("recipe_id")
-
-    #            recipe_comment = mongo.db.recipes.find_one(
-    #                                {"_id": ObjectId(r_id)})
-
-                # insert the comment to the database
-                comment = {
-                    'recipe_id': r_id,
-                    'created_by': session["user"],
-                    'comment': request.form.get("comment"),
-                    'posted': datetime.now(tz=None).strftime("%d-%b-%Y (%H:%M)")
-                }
-                mongo.db.comments.insert_one(comment)
-                print(request.args.get("recipe_id"))
-                flash("Thank you, comment successfully published")
-                mongo.db.recipes.find_one({"_id": ObjectId(r_id)})
-                return redirect(url_for("recipe"))
-
-    except:
-        flash("Please register or log in to add comments")
-        return render_template("register.html")
+    flash("Please log in to add comments")
+    return redirect(url_for("login"))
 
 
 if __name__ == "__main__":
