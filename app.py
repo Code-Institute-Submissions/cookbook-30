@@ -35,7 +35,7 @@ def search():
 
 @app.route("/recipe/<recipe_id>")
 def recipe(recipe_id):
-    show = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    show = mongo.db.recipes.find_one_or_404({"_id": ObjectId(recipe_id)})
     show_comments = list(mongo.db.comments.find({"recipe_id": recipe_id}))
     return render_template("recipe.html", recipe=show, comments=show_comments)
 
@@ -158,7 +158,7 @@ def edit_recipe(recipe_id):
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
         flash("Recipe successfully updated")
 
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(recipe_id)})
     return render_template("edit_recipe.html", recipe=recipe)
 
 
@@ -189,6 +189,11 @@ def add_comment(r_id):
 
     flash("Please log in to add comments")
     return redirect(url_for("login"))
+
+
+@app.errorhandler(404)
+def handle_404(exception):
+    return render_template("404.html", exception=exception)
 
 
 if __name__ == "__main__":
