@@ -146,6 +146,7 @@ def add_recipe():
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
+
     if request.method == "POST":
         submit = {
             "recipe_name": request.form.get("recipe_name"),
@@ -158,7 +159,9 @@ def edit_recipe(recipe_id):
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
         flash("Recipe successfully updated")
 
+
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    #tags_string = list(recipe.get("tags").join("tags"))
     return render_template("edit_recipe.html", recipe=recipe)
 
 
@@ -182,8 +185,8 @@ def add_comment():
 
                 r_id = request.args.get("recipe_id")
 
-                recipe_comment = mongo.db.recipes.find_one(
-                                    {"_id": ObjectId(r_id)})
+    #            recipe_comment = mongo.db.recipes.find_one(
+    #                                {"_id": ObjectId(r_id)})
 
                 # insert the comment to the database
                 comment = {
@@ -193,11 +196,10 @@ def add_comment():
                     'posted': datetime.now(tz=None).strftime("%d-%b-%Y (%H:%M)")
                 }
                 mongo.db.comments.insert_one(comment)
+                print(request.args.get("recipe_id"))
                 flash("Thank you, comment successfully published")
                 mongo.db.recipes.find_one({"_id": ObjectId(r_id)})
-                return render_template(
-                            "recipe.html", username=username,
-                            comment=comment, recipe=r_id)
+                return redirect(url_for("recipe"))
 
     except:
         flash("Please register or log in to add comments")
