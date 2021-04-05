@@ -15,12 +15,29 @@
 
     <header>
         <!-- Main Desktop nav bar menu -->
-        <nav class="nav-extended yellow darken-2">
-            <div class="nav-wrapper">
-                <a href="{{ url_for('get_recipes') }}" class="brand-logo">cogi</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
-                <ul class="right hide-on-med-and-down">
-                    <li><a href="{{ url_for('get_recipes') }}">Home</a></li>
+        <div class="navbar-fixed">
+            <nav class="nav-extended yellow darken-2">
+                <div class="nav-wrapper">
+                    <a href="{{ url_for('get_recipes') }}" class="brand-logo">cogi</a>
+                    <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+                    <ul class="right hide-on-med-and-down">
+                        <li><a href="{{ url_for('index') }}">Home</a></li>
+                        {% if session.user %}
+                            <li><a href="{{ url_for('profile', username=session['user']) }}">My Account</a></li>
+                            <li><a href="{{ url_for('add_recipe') }}">Add recipe</a></li>
+                            <li><a href="{{ url_for('logout') }}">Log out</a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('register') }}">Register</a></li>
+                            <li><a href="{{ url_for('login') }}">Log in</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- Side menu for mobile and tablet devices-->
+            <ul class="sidenav" id="mobile-demo">
+                <li><h4 class="center-align">cogi</h4></li>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
                     {% if session.user %}
                         <li><a href="{{ url_for('profile', username=session['user']) }}">My Account</a></li>
                         <li><a href="{{ url_for('add_recipe') }}">Add recipe</a></li>
@@ -29,22 +46,7 @@
                         <li><a href="{{ url_for('register') }}">Register</a></li>
                         <li><a href="{{ url_for('login') }}">Log in</a></li>
                     {% endif %}
-                </ul>
-            </div>
-        </nav>
-        <!-- Side menu for mobile and tablet devices-->
-        <ul class="sidenav" id="mobile-demo">
-            <li><h4 class="center-align">cogi</h4></li>
-            <li><a href="{{ url_for('get_recipes') }}">Home</a></li>
-                {% if session.user %}
-                    <li><a href="{{ url_for('profile', username=session['user']) }}">My Account</a></li>
-                    <li><a href="{{ url_for('add_recipe') }}">Add recipe</a></li>
-                    <li><a href="{{ url_for('logout') }}">Log out</a></li>
-                {% else %}
-                    <li><a href="{{ url_for('register') }}">Register</a></li>
-                    <li><a href="{{ url_for('login') }}">Log in</a></li>
-                {% endif %}
-        </ul>
+            </ul>
 
     </header>
     

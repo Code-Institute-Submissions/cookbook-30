@@ -5,6 +5,6 @@ $(document).ready(function(){
             placeholder: 'Enter recipe tags',
             secondaryPlaceholder: '+ Tag'
         });
+    $('.slider').slider();   
    
-
 });

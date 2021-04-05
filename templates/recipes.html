@@ -34,8 +34,11 @@
                 <div class="col s12 m4">
                         <div class="card">
                             <div class="card-content">
-                                <p>{{ recipe.recipe_name }}</p>
-                                <p>Prep time: {{ recipe.prep_time }}</p>
+                                <strong><p>{{ recipe.recipe_name }}</p></strong>
+                                <div>
+                                    <i class="fas fa-clock" style="float: left; padding-right: 5px; vertical-align: middle;"></i>
+                                    <p>{{ recipe.prep_time }}</p>
+                                </div>
                                 <p><em>Author: {{ recipe.created_by }}</em></p>
                                 {% if session.user|lower == recipe.created_by|lower %}
                                     <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn-small">
