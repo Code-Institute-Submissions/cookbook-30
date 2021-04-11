@@ -35,15 +35,17 @@
                         <div class="card">
                             <div class="card-content">
                                 <strong><p>{{ recipe.recipe_name }}</p></strong>
+                                {% for tag in recipe.tags %}
+                                    <div class="chip">
+                                        {{ tag }}
+                                    </div>
+                                {% endfor %}
                                 <div>
                                     <i class="fas fa-clock" style="float: left; padding-right: 5px; vertical-align: middle;"></i>
                                     <p>{{ recipe.prep_time }}</p>
                                 </div>
                                 <p><em>Author: {{ recipe.created_by }}</em></p>
                                 {% if session.user|lower == recipe.created_by|lower %}
-                                    <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn-small">
-                                        Delete <i class="fas fa-times right"></i>
-                                    </a>
                                     <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small">Edit</a>
                                 {% endif %}
                                 <a href="{{ url_for('recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small light-green darken-1">View</a>
