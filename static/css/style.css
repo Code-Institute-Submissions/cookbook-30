@@ -11,8 +11,8 @@ body {
  #homePageImage {
         position: fixed;
         left: 0px;
-        width: 100vw;
-        height: auto;
+        width: auto;
+        height: 100vh;
         z-index: -1;
         background-position-x: 0;
     }
@@ -38,3 +38,28 @@ body {
 .fadeIn {
   display: none;
 } 
+
+
+/*  ---------------------- # Media queries */
+
+/*  Medium devices (Tablets, 768px and up) */ 
+
+@media (min-width: 768px) { 
+
+    #homePageImage {
+        width: auto;
+        height: 100vh;
+    }
+
+}
+
+/*  Large devices (desktops, 992px and up) */ 
+
+@media (min-width: 992px) { 
+
+    #homePageImage {
+        width: 100vw;
+        height: auto;
+    }
+
+}
