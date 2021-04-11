@@ -39,6 +39,9 @@ body {
   display: none;
 } 
 
+#commentUser {
+    color: #0093FF;
+}
 
 /*  ---------------------- # Media queries */
 

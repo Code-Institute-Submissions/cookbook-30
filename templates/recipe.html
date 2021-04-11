@@ -32,21 +32,20 @@
             </div>
         {% endif %}
 
-
         <form class="center-align" method="POST" action="{{ url_for('add_comment', r_id=recipe._id) }}">
             <label for="comment">Comments</label>
             <textarea id="comment" class="materialize-textarea" name="comment" rows="16"></textarea>
             <button class="btn waves-effect waves-light" type="submit">Publish</button>
         </form>
 
-        
         {% for comment in comments %}
             <div>
-                {{ comment.comment }}
-                {{ comment.created_by }}
-                {{ comment.posted }}
+                <p><strong id="commentUser">{{ comment.created_by }}</strong> - <em>{{ comment.posted }}</em></p>
+                <p>{{ comment.comment }}</p>
             </div>
-        {% endfor %} 
-
+            {% if loop.index != loop.length %}
+                <div class="divider"></div>
+            {% endif %}
+        {% endfor %}
 
     {% endblock %}
