@@ -5,6 +5,13 @@ $(document).ready(function(){
             placeholder: 'Enter recipe tags',
             secondaryPlaceholder: '+ Tag'
         });
-    $('.slider').slider();   
+    $('.slider').slider();
+    $(window).scroll(function () {
+        $(".fadeIn").each(function (i) {
+        $(this)
+            .delay(i * 1000)
+            .fadeIn(1000);
+        });
+    });
    
 });

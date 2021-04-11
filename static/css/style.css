@@ -35,4 +35,6 @@ body {
     padding: 0;
 }
 
-
+.fadeIn {
+  display: none;
+} 
