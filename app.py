@@ -172,7 +172,7 @@ def edit_recipe(recipe_id):
 def delete_recipe(recipe_id):
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     flash("Recipe successfully deleted")
-    return redirect(url_for("get_recipes"))
+    return redirect(url_for("profile"))
 
 
 # publish comment and storing in own comments collection in DB

@@ -12,7 +12,7 @@
         </div>
     </div>
             <div class="row">
-                <div class="col s4">
+                <div class="col s12 m4">
                     <div class="card">
                             <div class="card-image">
                                 <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="fas fa-plus"></i></a>
@@ -22,7 +22,7 @@
                 </div>
                 {% for recipe in recipes %}
                     {% if session.user|lower == recipe.created_by|lower %}
-                        <div class="col s4">
+                        <div class="col s12 m4">
                             <div class="card">
                                 <div class="card-content">
                                     <strong><p>{{ recipe.recipe_name }}</p></strong>
@@ -35,7 +35,7 @@
                                             </div>
                                         {% endfor %}
                                     </div>
-                                    <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="btn-small red lighten-1">Delete</a>
+                                    <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn-small red lighten-1">Delete</a>
                                     <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small">Edit</a>
                                     <a href="{{ url_for('recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small light-green darken-1">View</a>
                                 </div>
