@@ -167,33 +167,33 @@ def add_recipe():
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
-    """ Allows only the creator of that recipe to edit it. If they are
-        not registered or logged in they are redirected to the
-        registration form"""
+
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
 
     if session["user"]:
 
-        recipe = mongo.db.recipes.find_one_or_404(
+        recipe_to_be_updated = mongo.db.recipes.find_one_or_404(
                 {"_id": ObjectId(recipe_id)})
 
-        if request.method == "POST":
-            submit = {
-                "recipe_name": request.form.get("recipe_name"),
-                "ingredients": request.form.get("ingredients"),
-                "method": request.form.get("method"),
-                "prep_time": request.form.get("prep_time"),
-                "tags": request.form.get("tags").split(", "),
-                "image_url": request.form.get("image_url"),
-                "created_by": session["user"]
-            }
-            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
-            flash("Recipe successfully updated")
-            return redirect(url_for('recipe', recipe_id=recipe_id))
+        if session["user"] == recipe_to_be_updated["created_by"]:
+
+            if request.method == "POST":
+                submit = {
+                    "recipe_name": request.form.get("recipe_name"),
+                    "ingredients": request.form.get("ingredients"),
+                    "method": request.form.get("method"),
+                    "prep_time": request.form.get("prep_time"),
+                    "tags": request.form.get("tags").split(", "),
+                    "image_url": request.form.get("image_url"),
+                    "created_by": session["user"]
+                }
+                mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
+                flash("Recipe successfully updated")
+                return redirect(url_for('recipe', recipe_id=recipe_id))
 
         return render_template(
-            "edit_recipe.html", recipe=recipe, username=username)
+            "edit_recipe.html", recipe=recipe_to_be_updated, username=username)
 
     return render_template("register.html")
 
@@ -211,7 +211,7 @@ def delete_recipe(recipe_id):
 # publish comment and storing in own comments collection in DB
 @app.route("/add_comment/<r_id>", methods=["GET", "POST"])
 def add_comment(r_id):
-    """ Allows a user to add a comment to a recipe by using the recipe_id. """
+    """ Allows a registered user to add a comment to a recipe by using the recipe_id. """
     if "user" in session:
         if request.method == "POST":
             username = mongo.db.users.find_one(
