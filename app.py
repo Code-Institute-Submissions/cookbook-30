@@ -22,18 +22,22 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/index")
 def index():
+    """ Landing page with search index for all recipes """
     recipes = list(mongo.db.recipes.find())
     return render_template("index.html", recipes=recipes)
 
 
 @app.route("/get_recipes")
 def get_recipes():
+    """ Page showing all recipes. Generates a list from the database """
     recipes = list(mongo.db.recipes.find())
     return render_template("recipes.html", recipes=recipes)
 
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    """ Search function that searches the database for text
+        in the recipe titles, ingredients and tags """
     query = request.form.get("query")
     recipes = list(mongo.db.recipes.find({"$text": {"$search": query}}))
     return render_template("recipes.html", recipes=recipes)
@@ -41,6 +45,9 @@ def search():
 
 @app.route("/recipe/<recipe_id>")
 def recipe(recipe_id):
+    """ Takes a recipe ID and shows a page displaying
+        all recipe details for a user to follow. Finds
+        a recipe in the database by its ID """
     show = mongo.db.recipes.find_one_or_404({"_id": ObjectId(recipe_id)})
     show_comments = list(mongo.db.comments.find({"recipe_id": recipe_id}))
     return render_template("recipe.html", recipe=show, comments=show_comments)
@@ -48,6 +55,8 @@ def recipe(recipe_id):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """ Registration function that checks if a user already
+        exists and adds a user to the databse so they are registered."""
     if request.method == "POST":
         # check is username already exists in database
         existing_user = mongo.db.users.find_one(
@@ -72,6 +81,8 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """ Checks the user exists in the database and the password matches
+        the hased password or redirects to log in page."""
     if request.method == "POST":
         # check if username already exists in database
         existing_user = mongo.db.users.find_one(
@@ -100,6 +111,8 @@ def login():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
+    """Renders the users profile page which shows a list of
+        the recipes that they have created."""
     # get the session user's username from the database
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -115,6 +128,7 @@ def profile(username):
 
 @app.route("/logout")
 def logout():
+    """ Logs a user out by clearing the session """
     # remove user from session cookies
     flash("You have logged out")
     session.clear()
@@ -123,13 +137,15 @@ def logout():
 
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
+    """ Allows only a registered user to add a recipe. If they are
+        not registered or logged in they are redirected to the
+        registration form."""
     try:
         username = mongo.db.users.find_one(
             {"username": session["user"]})["username"]
         if session["user"]:
 
             if request.method == "POST":
-                print(request.form.get("tags"))
                 recipe = {
                     "recipe_name": request.form.get("recipe_name"),
                     "ingredients": request.form.get("ingredients"),
@@ -138,7 +154,6 @@ def add_recipe():
                     "tags": request.form.get("tags").split(", "),
                     "created_by": session["user"]
                 }
-                print(request.form.get("tags").split(", "))
                 mongo.db.recipes.insert_one(recipe)
                 flash("Recipe successfully created")
                 return redirect(url_for("get_recipes"))
@@ -151,27 +166,39 @@ def add_recipe():
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
+    """ Allows only the creator of that recipe to edit it. If they are
+        not registered or logged in they are redirected to the
+        registration form"""
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
 
-    recipe = mongo.db.recipes.find_one_or_404({"_id": ObjectId(recipe_id)})
+    if session["user"]:
 
-    if request.method == "POST":
-        submit = {
-            "recipe_name": request.form.get("recipe_name"),
-            "ingredients": request.form.get("ingredients"),
-            "method": request.form.get("method"),
-            "prep_time": request.form.get("prep_time"),
-            "tags": request.form.get("tags").split(", "),
-            "created_by": session["user"]
-        }
-        mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
-        flash("Recipe successfully updated")
-        return redirect(url_for('recipe', recipe_id=recipe_id))
+        recipe = mongo.db.recipes.find_one_or_404(
+                {"_id": ObjectId(recipe_id)})
 
-    return render_template("edit_recipe.html", recipe=recipe)
+        if request.method == "POST":
+            submit = {
+                "recipe_name": request.form.get("recipe_name"),
+                "ingredients": request.form.get("ingredients"),
+                "method": request.form.get("method"),
+                "prep_time": request.form.get("prep_time"),
+                "tags": request.form.get("tags").split(", "),
+                "created_by": session["user"]
+            }
+            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
+            flash("Recipe successfully updated")
+            return redirect(url_for('recipe', recipe_id=recipe_id))
+
+        return render_template(
+            "edit_recipe.html", recipe=recipe, username=username)
+
+    return render_template("register.html")
 
 
 @app.route("/delete_recipe/<recipe_id>")
 def delete_recipe(recipe_id):
+    """ Removes a recipe from the database and notifies the user."""
     username = mongo.db.users.find_one(
             {"username": session["user"]})["username"]
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
@@ -182,6 +209,7 @@ def delete_recipe(recipe_id):
 # publish comment and storing in own comments collection in DB
 @app.route("/add_comment/<r_id>", methods=["GET", "POST"])
 def add_comment(r_id):
+    """ Allows a user to add a comment to a recipe by using the recipe_id. """
     if "user" in session:
         if request.method == "POST":
             username = mongo.db.users.find_one(
@@ -203,6 +231,7 @@ def add_comment(r_id):
 
 @app.errorhandler(404)
 def handle_404(exception):
+    """ Error function if a link is no longer usable """
     return render_template("404.html", exception=exception)
 
 
@@ -210,3 +239,4 @@ if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)
+
