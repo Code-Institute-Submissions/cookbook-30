@@ -33,8 +33,11 @@
             {% for recipe in recipes %}
                 <div class="col s12 m4">
                         <div class="card">
+                            <div class="card-image">
+                                <img src="{{ recipe.image_url }}" alt="{{ recipe.recipe_name }}">
+                                <span class="card-title">{{ recipe.recipe_name }}</span>
+                            </div>
                             <div class="card-content">
-                                <strong><p>{{ recipe.recipe_name }}</p></strong>
                                 {% for tag in recipe.tags %}
                                     <div class="chip">
                                         {{ tag }}

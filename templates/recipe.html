@@ -3,6 +3,8 @@
     {% block content %}
 
         <h1 class="center-align">{{ recipe.recipe_name }}</h1>
+
+        <img src="{{ recipe.image_url }}">
         
         {% for tag in recipe.tags %}
             <div class="chip">
