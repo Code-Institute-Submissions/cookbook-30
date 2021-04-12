@@ -172,9 +172,11 @@ def edit_recipe(recipe_id):
 
 @app.route("/delete_recipe/<recipe_id>")
 def delete_recipe(recipe_id):
+    username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
     mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
     flash("Recipe successfully deleted")
-    return redirect(url_for("profile"))
+    return redirect(url_for("profile", username=username))
 
 
 # publish comment and storing in own comments collection in DB
