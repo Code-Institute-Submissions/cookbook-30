@@ -167,7 +167,7 @@ def add_recipe():
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
-
+    """ Allows a registered user and creator of that recipe only to edit. """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
 
