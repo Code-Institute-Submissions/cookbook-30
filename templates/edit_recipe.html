@@ -40,12 +40,12 @@
                     <textarea id="prep_time" class="materialize-textarea" name="prep_time" rows="1" required>
                         {{- recipe.prep_time -}}
                     </textarea>
-                    <label for="prep_time">Prep time (minutes)</label>
+                    <label for="prep_time">Prep time Eg. 1 hour 30 minutes</label>
                 </div>
             </div>
             <!-- Recipe type tags -->
             <div class="row">
-                <div class="col s12" >
+                <div class="input-field col s12" >
                     <textarea id="tags" name="tags" class="materialize-textarea" type="text">
                         {{- recipe.tags|join(", ") -}}
                     </textarea>
@@ -54,7 +54,7 @@
             </div>
             <!-- Recipe image -->
             <div class="row">
-                <div class="col s12" >
+                <div class="input-field col s12" >
                     <textarea id="image_url" name="image_url" class="materialize-textarea" type="text" required>{{ recipe.image_url }}</textarea>
                     <label for="image_url">Please insert a whole image url.</label>
                 </div>
