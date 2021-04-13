@@ -52,6 +52,12 @@ body {
     z-index: 3;
 }
 
+.card-image img {
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+}
+
 /*  ---------------------- # Media queries */
 
 /*  Medium devices (Tablets, 768px and up) */ 
