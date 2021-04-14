@@ -58,6 +58,23 @@ body {
     object-fit: cover;
 }
 
+.card .card-title {
+    color: rgba(24, 24, 13);
+    font-size: 16px;
+}
+
+#create-recipe {
+    border: 2px dashed #a1a1a1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: #333;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+
 /*  ---------------------- # Media queries */
 
 /*  Medium devices (Tablets, 768px and up) */ 
