@@ -54,22 +54,6 @@ body {
 
 /* ------------ have to amend in media query */ 
 
-#page-image {
-    height: 300px;
-    width: 300px;
-    object-fit: cover;
-}
-
-#recipe-time {
-    padding-right: 5px;
-}
-
-#prep-time {
-    display: inline-block;
-}
-
-
-
 .card-image img {
     height: 250px;
     width: 250px;
