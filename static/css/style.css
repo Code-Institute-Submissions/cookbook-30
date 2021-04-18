@@ -12,6 +12,21 @@ body {
 
 /*  ---------------------- # homePageImage needs to be changed to mob first and put as media query */ 
 
+.sidenav li>a {
+    color: #555;
+    font-size: 3rem;
+    padding: 80px 0px 0px 0px;
+    text-align: center;
+}
+
+.sidenav li>a>i {
+    color: #555;
+    font-size: 3rem;
+    padding: 0px;
+    float: none;
+    margin: 0px;
+}
+
  #homePageImage {
         position: fixed;
         left: 0px;
