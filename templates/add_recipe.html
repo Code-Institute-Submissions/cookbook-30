@@ -33,6 +33,7 @@
             <!-- Time for cooking prep text field -->
             <div class="row">
                 <div class="input-field col s12">
+                    <i class="fas fa-clock prefix"></i>
                     <textarea id="prep_time" class="materialize-textarea" name="prep_time" rows="1" required></textarea>
                     <label for="prep_time">Prep time Eg. 1 hour 30 minutes</label>
                 </div>
@@ -40,13 +41,15 @@
             <!-- Recipe type tags / this are not required like the other fields by the user -->
             <div class="row">
                 <div class="col s12 input-field" >
-                    <textarea id="tags" name="tags" class="materialize-textarea" type="text"></textarea>
+                    <i class="fas fa-tags prefix"></i>
+                    <textarea id="tags" name="tags" class="materialize-textarea" type="text" required></textarea>
                     <label for="tags">Type keywords, or tags, so members can find your recipe. Eg. Italian or Snack. These will appear as tags.</label>
                 </div>
             </div>
             <!-- Recipe image -->
             <div class="row">
-                <div class="col s12 input-field" >
+                <div class="col s12 input-field">
+                    <i class="fas fa-image prefix"></i>
                     <textarea id="image_url" name="image_url" class="materialize-textarea" type="text" required></textarea>
                     <label for="image_url">Please insert a whole image url.</label>
                 </div>
