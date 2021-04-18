@@ -43,6 +43,10 @@ body {
     padding: 20px;
 }
 
+.callToAction h2:hover {
+    color: #6a5acd;
+}
+
 .overlay {
     width: 100%;
     height: 100%;
@@ -81,6 +85,22 @@ body {
 #prep-time {
         display: inline-block;
     }
+
+footer a {
+    color: inherit;
+    padding: 5px;
+}
+
+.contactLinks {
+    font-family: "poppins", sans-serif;
+}
+
+footer a:hover { 
+    color: #6a5acd;
+    font-weight: 100;
+}
+
+
 
 /* ------------ have to amend in media query */ 
 
