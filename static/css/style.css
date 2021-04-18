@@ -30,6 +30,19 @@ body {
     height: 100vh;
 }
 
+.callToAction h1 {
+    padding: 5px 150px;
+    color: #555;
+    margin: 0;
+}
+
+.callToAction h2 {
+    font-size: 1.5rem;
+    color: #555;
+    margin: 0;
+    padding: 20px;
+}
+
 .overlay {
     width: 100%;
     height: 100%;
@@ -47,9 +60,10 @@ body {
     color: #0093FF;
 }
 
-.footer {
-    background-color: white;
-    z-index: 3;
+#aboutText {
+    font-size: 1.75rem;
+    font-weight: 500;
+    padding-bottom: 40px;
 }
 
 /* ------------ have to amend in media query */ 
@@ -74,6 +88,10 @@ body {
     justify-content: center;
     align-items: center;
     padding: 40px;
+}
+
+#thirdParty {
+    padding-bottom: 40px;
 }
 
 
