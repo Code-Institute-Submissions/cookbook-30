@@ -112,6 +112,10 @@ body {
 
 @media (min-width: 992px) { 
 
+    nav .brand-logo {
+        padding-left: 20px;
+    }
+
     #homePageImage {
         width: 100vw;
         height: auto;
