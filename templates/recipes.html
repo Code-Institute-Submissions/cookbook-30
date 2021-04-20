@@ -43,9 +43,11 @@
                                     <p>{{ recipe.prep_time }}</p>
                                 </div>
                                 {% for tag in recipe.tags %}
-                                    <div class="chip">
-                                        {{ tag }}
-                                    </div>
+                                            {% if loop.index < 3 %}
+                                                <div class="chip">
+                                                    {{ tag }}
+                                                </div>
+                                            {% endif %} 
                                 {% endfor %}
                                 <p><em>Author: {{ recipe.created_by }}</em></p>
                                 {% if session.user|lower == recipe.created_by|lower %}
