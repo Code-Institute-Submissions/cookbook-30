@@ -143,26 +143,28 @@ def add_recipe():
     try:
         username = mongo.db.users.find_one(
             {"username": session["user"]})["username"]
-        if session["user"]:
-
-            if request.method == "POST":
-                recipe = {
-                    "recipe_name": request.form.get("recipe_name"),
-                    "ingredients": request.form.get("ingredients"),
-                    "method": request.form.get("method"),
-                    "prep_time": request.form.get("prep_time"),
-                    "tags": request.form.get("tags").split(", "),
-                    "image_url": request.form.get("image_url"),
-                    "created_by": session["user"]
-                }
-                mongo.db.recipes.insert_one(recipe)
-                flash("Recipe successfully created")
-                return redirect(url_for("get_recipes"))
-            return render_template("add_recipe.html", username=username)
-
     except:
         flash("Please register or log in to start adding recipes")
         return render_template("register.html")
+
+    if session["user"]:
+
+        if request.method == "POST":
+            recipe = {
+                "recipe_name": request.form.get("recipe_name"),
+                "ingredients": request.form.get("ingredients"),
+                "method": request.form.get("method"),
+                "prep_time": request.form.get("prep_time"),
+                "tags": request.form.get("tags").split(", "),
+                "image_url": request.form.get("image_url"),
+                "created_by": session["user"]
+            }
+            mongo.db.recipes.insert_one(recipe)
+            recipe_created = mongo.db.recipes.find_one({"recipe_name": recipe["recipe_name"]})
+            flash("Recipe successfully created")
+            return redirect(url_for(
+                    'recipe', recipe_id=recipe_created['_id']))
+        return render_template("add_recipe.html", username=username)
 
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
