@@ -115,6 +115,11 @@ footer a:hover {
     font-weight: 100;
 }
 
+.prep-time {
+    float: left; 
+    padding-right: 5px;  
+}
+
 
 
 /* ------------ have to amend in media query */ 
