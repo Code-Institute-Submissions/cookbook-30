@@ -2,97 +2,99 @@
 
     {% block content %}
 
-
-        <div class="row">
-            <div class="overlay">
-                <img src="static/images/roast.jpg" alt="Home cooked soup" id="homePageImage">
-            </div>
-            <div class="callToAction">
-                <h1>Cogi</h1>
-                <a href="{{ url_for('get_recipes') }}">
-                    <h2 class="center-align">cooking up a community</h2>
-                </a>
-                <div>
-                    <form action="{{ url_for('search') }}" method="post" class="col s12">
-                        <div class="row valignwrapper centeralign">
-                            <div class="input-field col s12">
-                                <i class="fas fa-search prefix"></i>
-                                <input type="text" name="query" minlength="3" id="query" class="validate" required>
-                                <label for="query">Search recipes</label>
-                            </div>
-                            <div class="col s12">
-                                <button type="submit" id="homePageSearch">
-                                    Find recipe
-                                </button>
-                                <p class="seeAllRecipes"><a href="{{ url_for('get_recipes') }}">see all recipes</a></p>
-                            </div>
+    <!-- Landing page -->
+    <div class="row">
+        <div class="overlay">
+            <img src="static/images/roast.jpg" alt="Home cooked soup" id="homePageImage">
+        </div>
+        <div class="callToAction">
+            <h1>Cogi</h1>
+            <a href="{{ url_for('get_recipes') }}">
+                <h2 class="center-align">cooking up a community</h2>
+            </a>
+            <div>
+                <form action="{{ url_for('search') }}" method="post" class="col s12">
+                    <div class="row valignwrapper centeralign">
+                        <div class="input-field col s12">
+                            <i class="fas fa-search prefix"></i>
+                            <input type="text" name="query" minlength="3" id="query" class="validate" required>
+                            <label for="query">Search recipes</label>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div> 
-
-        <div class="row fadeIn">
-            <div class="col s12 center-align" id="aboutText">
-                <p>Cogi is a community of home cooks that want to create and share delicious meals. 
-                    You can search for and follow a recipe you would like to try yourself as well as join our community 
-                    to save and share your own recipes.</p>
+                        <div class="col s12">
+                            <button type="submit" id="homePageSearch">
+                                Find recipe
+                            </button>
+                            <p class="seeAllRecipes"><a href="{{ url_for('get_recipes') }}">see all recipes</a></p>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
+    </div> 
 
-        <div class="row fadeIn" id="thirdParty">
-            <div class="col s12 m3">
-                <div class="card small">
-                    <div class="card-image">
-                        <img src="https://www.lakeland.co.uk/common/banners/category/hero/2303-cat-hero-ooni-pizza-xl.jpg" alt="Lakeland cookware">
-                    </div>
-                    <div class="card-content">
-                        <p><strong>Lakeland cookware</strong></p>
-                    </div>
-                    <div class="card-action">
-                        <a href="https://www.lakeland.co.uk/shop/cooking" target="_blank" rel="noopener"><strong>View here</strong></a>
-                    </div>
+    <!-- About text -->
+    <div class="row fadeIn">
+        <div class="col s12 center-align" id="aboutText">
+            <p>Cogi is a community of home cooks that want to create and share delicious meals. 
+                You can search for and follow a recipe you would like to try yourself as well as join our community 
+                to save and share your own recipes.</p>
+        </div>
+    </div>
+
+    <!-- External marketing links -->
+    <div class="row fadeIn" id="thirdParty">
+        <div class="col s12 m3">
+            <div class="card small">
+                <div class="card-image">
+                    <img src="https://www.lakeland.co.uk/common/banners/category/hero/2303-cat-hero-ooni-pizza-xl.jpg" alt="Lakeland cookware">
                 </div>
-            </div>
-            <div class="col s12 m3">
-                <div class="card small">
-                    <div class="card-image">
-                        <img src="https://i.pinimg.com/originals/12/f4/dd/12f4dd62805bbc9e0cf354c785a2382b.jpg" alt="John Lewis">
-                    </div>
-                    <div class="card-content">
-                        <p><strong>John Lewis</strong></p>
-                    </div>
-                    <div class="card-action">
-                        <a href="https://www.johnlewis.com/home-garden/cooking-baking/c600001134" target="_blank" rel="noopener"><strong>Shop now</strong></a>
-                    </div>
+                <div class="card-content">
+                    <p><strong>Lakeland cookware</strong></p>
                 </div>
-            </div>
-            <div class="col s12 m3">
-                <div class="card small">
-                    <div class="card-image">
-                        <img src="https://www.ikea.com/images/a-guide-to-buying-pots-and-pans-cd4046dc06fc9ad544510d3661e25907.jpg?f=xl" alt="Ikea kitchenware">
-                    </div>
-                    <div class="card-content">
-                        <p><strong>Ikea kitchenware</strong></p>
-                    </div>
-                    <div class="card-action">
-                        <a href="https://www.ikea.com/gb/en/cat/cookware-kt003/" target="_blank" rel="noopener"><strong>Browse</strong></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col s12 m3">
-                <div class="card small">
-                    <div class="card-image">
-                        <img src="https://images.dunelm.com/30689930.jpg?$standardplayerdefault$&img404=noimagedefault" alt="Dunelm cookware">
-                    </div>
-                    <div class="card-content">
-                        <p><strong>Dunelm Cook & Dine</strong></p>
-                    </div>
-                    <div class="card-action">
-                        <a href="https://www.dunelm.com/category/home-and-furniture/cook-and-dine" target="_blank" rel="noopener"><strong>Take a look</strong></a>
-                    </div>
+                <div class="card-action">
+                    <a href="https://www.lakeland.co.uk/shop/cooking" target="_blank" rel="noopener"><strong>View here</strong></a>
                 </div>
             </div>
         </div>
+        <div class="col s12 m3">
+            <div class="card small">
+                <div class="card-image">
+                    <img src="https://i.pinimg.com/originals/12/f4/dd/12f4dd62805bbc9e0cf354c785a2382b.jpg" alt="John Lewis">
+                </div>
+                <div class="card-content">
+                    <p><strong>John Lewis</strong></p>
+                </div>
+                <div class="card-action">
+                    <a href="https://www.johnlewis.com/home-garden/cooking-baking/c600001134" target="_blank" rel="noopener"><strong>Shop now</strong></a>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m3">
+            <div class="card small">
+                <div class="card-image">
+                    <img src="https://www.ikea.com/images/a-guide-to-buying-pots-and-pans-cd4046dc06fc9ad544510d3661e25907.jpg?f=xl" alt="Ikea kitchenware">
+                </div>
+                <div class="card-content">
+                    <p><strong>Ikea kitchenware</strong></p>
+                </div>
+                <div class="card-action">
+                    <a href="https://www.ikea.com/gb/en/cat/cookware-kt003/" target="_blank" rel="noopener"><strong>Browse</strong></a>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m3">
+            <div class="card small">
+                <div class="card-image">
+                    <img src="https://images.dunelm.com/30689930.jpg?$standardplayerdefault$&img404=noimagedefault" alt="Dunelm cookware">
+                </div>
+                <div class="card-content">
+                    <p><strong>Dunelm Cook & Dine</strong></p>
+                </div>
+                <div class="card-action">
+                    <a href="https://www.dunelm.com/category/home-and-furniture/cook-and-dine" target="_blank" rel="noopener"><strong>Take a look</strong></a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {% endblock %}

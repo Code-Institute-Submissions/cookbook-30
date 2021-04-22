@@ -2,7 +2,7 @@
 {% block content %}
 
     <h3 class="center-align searchTitle">All recipes</h3>
-
+    <!-- Search function -->
     <div class="card-panel.grey search">
         <form action="{{ url_for('search') }}" method="post" class="col s12">
             <div class="row valignwrapper centeralign">
@@ -11,62 +11,70 @@
                     <input type="text" name="query" minlength="3" id="query" class="validate" required>
                     <label for="query">Search recipes</label>
                 </div>
+                <!-- Submit search button-->
                 <div class="col s12 m4">
                     <button type="submit" class="btn waves-effect waves-light brown darken-3">
                         <i class="fas fa-search left"></i> Search
                     </button>
+                    <!-- Reset search button -->
                     <a href="{{ url_for('get_recipes') }}" class="red btn waves-effect waves-light">Reset</a>
                 </div>
             </div>
         </form>
     </div>
-
     <div class="row">
+        <!-- Add recipe button-->
         {% if recipes|length > 0 %}
             <div class="col s12 m4 create-recipe">
-                        <a href="{{ url_for('add_recipe') }}">
-                            <i class="fas fa-plus"></i>  
-                            <p><strong>Add new recipe</strong></p>
-                        </a>
+                <a href="{{ url_for('add_recipe') }}">
+                    <i class="fas fa-plus"></i>  
+                    <p><strong>Add new recipe</strong></p>
+                </a>
             </div>
-        
+            <!-- Show all recipes in database -->
             {% for recipe in recipes %}
                 <div class="col s12 m4">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="{{ recipe.image_url }}" alt="{{ recipe.recipe_name }}">
-                            </div>
-                            <div class="card-content">
-                                <p class="card-title"><strong>{{ recipe.recipe_name }}</strong></p>
-                                <div>
-                                    <i class="fas fa-clock prep-time"></i>
-                                    <p>{{ recipe.prep_time }}</p>
-                                </div>
-                                {% for tag in recipe.tags %}
-                                            {% if loop.index < 3 %}
-                                                <div class="chip">
-                                                    {{ tag }}
-                                                </div>
-                                            {% endif %} 
-                                {% endfor %}
-                                <p><em>Author: {{ recipe.created_by }}</em></p>
-                                {% if session.user|lower == recipe.created_by|lower %}
-                                    <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small">Edit</a>
-                                {% endif %}
-                                <a href="{{ url_for('recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small light-green darken-1">View</a>
-                            </div>
+                    <!-- Recipe card -->
+                    <div class="card">
+                        <!-- Recipe image -->
+                        <div class="card-image">
+                            <img src="{{ recipe.image_url }}" alt="{{ recipe.recipe_name }}">
                         </div>
+                        <div class="card-content">
+                            <!-- Recipe name, prep time -->
+                            <p class="card-title"><strong>{{ recipe.recipe_name }}</strong></p>
+                            <div>
+                                <i class="fas fa-clock prep-time"></i>
+                                <p>{{ recipe.prep_time }}</p>
+                            </div>
+                            <!-- Max 2 recipe tags shown for size and layout -->
+                            {% for tag in recipe.tags %}
+                                {% if loop.index < 3 %}
+                                    <div class="chip">
+                                        {{ tag }}
+                                    </div>
+                                {% endif %} 
+                            {% endfor %}
+                            <p><em>Author: {{ recipe.created_by }}</em></p>
+                            <!-- If logged in user is recipe creator edit button is visable -->
+                            {% if session.user|lower == recipe.created_by|lower %}
+                                <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small">Edit</a>
+                            {% endif %}
+                            <a href="{{ url_for('recipe', recipe_id=recipe._id) }}" class="waves-effect waves-light btn-small light-green darken-1">View</a>
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
         {% else %}
+            <!-- If no results found in search -->
             <h4 class="center-align red-text">Oops! No results found.</h4>
             <div class="row">
-                    <div class="col s12 m4 create-recipe center-align">
-                        <a href="{{ url_for('add_recipe') }}">
-                            <i class="fas fa-plus"></i>  
-                            <p><strong>Add new recipe</strong></p>
-                        </a>
-                    </div>
+                <div class="col s12 m4 create-recipe center-align">
+                    <a href="{{ url_for('add_recipe') }}">
+                        <i class="fas fa-plus"></i>  
+                        <p><strong>Add new recipe</strong></p>
+                    </a>
+                </div>
             </div>
         {% endif %}
     </div>
