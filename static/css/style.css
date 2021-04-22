@@ -10,7 +10,11 @@ body {
     color: #373737;
 }
 
-/*  ---------------------- # homePageImage needs to be changed to mob first and put as media query */ 
+.fadeIn {
+  display: none;
+} 
+
+/*  ---------------------- * Index page and navigation */ 
 
 .sidenav li>a {
     color: #555;
@@ -71,12 +75,17 @@ body {
     padding: 0;
 }
 
-.fadeIn {
-  display: none;
-} 
+.seeAllRecipes a {
+    color:#555;
+    text-decoration: none;
+}
 
-#commentUser {
-    color: #0093FF;
+.seeAllRecipes {
+    text-align: center;
+}
+
+.seeAllRecipes a:hover {
+    color: #6a5acd;
 }
 
 #aboutText {
@@ -87,69 +96,6 @@ body {
 
 #thirdParty {
     padding-bottom: 40px;
-}
-
-.recipeHeader {
-    padding-top: 50px;
-}
-
-.recipeHeader h1 {
-    font-size: 3rem;
-}
-
-#prep-time {
-        display: inline-block;
-    }
-
-footer a {
-    color: inherit;
-    padding: 5px;
-}
-
-.contactLinks {
-    font-family: "poppins", sans-serif;
-}
-
-footer a:hover { 
-    color: #6a5acd;
-    font-weight: 100;
-}
-
-.prep-time {
-    float: left; 
-    padding-right: 5px;  
-}
-
-
-
-/* ------------ have to amend in media query */ 
-
-.card-image img {
-    height: 250px;
-    width: 250px;
-    object-fit: cover;
-}
-
-#page-image {
-    height: 300px;
-    width: 300px;
-    object-fit: cover;
-}
-
-.card .card-title {
-    color: rgba(24, 24, 13);
-    font-size: 16px;
-}
-
-.create-recipe {
-    border: 2px dashed #a1a1a1;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    color: #333;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
 }
 
 #homePageSearch {
@@ -165,20 +111,8 @@ footer a:hover {
     color: #fff;
 }
 
-.seeAllRecipes a {
-    color:#555;
-    text-decoration: none;
-}
 
-.seeAllRecipes {
-    text-align: center;
-}
-
-.seeAllRecipes a:hover {
-    color: #6a5acd;
-}
-
-
+/*  ---------------------- * Recipe cards and results */ 
 
 .search {
     padding: 30px 0px 20px 0px;
@@ -187,6 +121,83 @@ footer a:hover {
 .searchTitle {
     padding-top: 30px;
 }
+
+.create-recipe {
+    border: 2px dashed #a1a1a1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: #333;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.prep-time {
+    float: left; 
+    padding-right: 5px;  
+}
+
+.card-image img {
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+}
+
+.card-image img {
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+}
+
+.card .card-title {
+    color: rgba(24, 24, 13);
+    font-size: 16px;
+}
+
+/*  ---------------------- * Recipe page */ 
+
+.recipeHeader {
+    padding-top: 50px;
+}
+
+.recipeHeader h1 {
+    font-size: 3rem;
+}
+
+#page-image {
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+}
+
+#prep-time {
+    display: inline-block;
+}
+
+
+/*  ---------------------- * Comments */ 
+
+#commentUser {
+    color: #0093FF;
+}
+
+/*  ---------------------- # Footer */ 
+
+footer a {
+    color: inherit;
+    padding: 5px;
+}
+
+.contactLinks {
+    font-family: "poppins", sans-serif;
+}
+
+footer a:hover { 
+    color: #6a5acd;
+    font-weight: 100;
+}
+
 
 /*  ---------------------- # Media queries */
 
@@ -215,7 +226,4 @@ footer a:hover {
     }
 
     
-
-    
-
 }
