@@ -178,6 +178,10 @@ body {
 
 /*  ---------------------- * Comments */ 
 
+.comment {
+    padding-top: 50px;
+}
+
 #commentUser {
     color: #0093FF;
 }
