@@ -69,11 +69,14 @@
                         Cancel <i class="fas fa-undo right"></i>
                     </a>
                     <!-- Delete recipe button -->
-                    <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" onclick="return confirm('Are you sure you want to delete this recipe?');" class="btn-large red">
-                        Delete <i class="fas fa-times right"></i>
+                    <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" onclick="return confirm('Are you sure you want to delete this recipe?');" 
+                        class="btn-large red darken-4">
+                        Delete
+                        <i class="fas fa-times right"></i>
                     </a>
                     <!-- Update recipe button -->
-                    <button class="btn-large waves-effect waves-light  light-green darken-3" type="submit">Update recipe
+                    <button class="btn-large waves-effect waves-light light-green darken-3" type="submit">
+                        Update recipe
                         <i class="fas fa-edit right"></i>
                     </button>
                 </div>
