@@ -111,6 +111,11 @@ body {
     color: #fff;
 }
 
+/*  ---------------------- * Registration page */ 
+
+.signIn {
+    padding: 30px 0px;
+}
 
 /*  ---------------------- * Recipe cards and results */ 
 
