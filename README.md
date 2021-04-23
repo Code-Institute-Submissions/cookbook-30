@@ -2,13 +2,13 @@
 
 ## Contents
 
-* User and Site owner goals, Data schema and planning 
-* UX Design and planning 
+* User and Site owner goals, Data schema and planning
+* UX Design and planning
 * Testing and compatibility
 * Deployment
 * Credits 
 ---
-[mockup screengrabs]
+![alt Mockup](/static/images/readme/mockup.jpg)
 
 I have created a data centric and interactive website for a fictional food company, Cogi (which translates to ‘to cook’ in Welsh), that allows a user to view recipes submitted by other users and themselves, register and log in and out, and registered users can create, view, update and delete their own recipes. Registered users are also able to publish comments on any recipe meaning they can see how popular, successful or obtain other feedback on a recipe. View the live project here [Cogi Cookbook](https://cogi-cookbook.herokuapp.com/)
 
@@ -22,8 +22,11 @@ External user goal: The site’s main users, and derived from the main use case,
 
 Site owner/business goal: More recipes on the site means more users searching and clicking. The brand wants to increase users viewing recipes and registration and use the site for their own recipes. The brand wants the site to be lucrative and includes links to cooking homeware, where clicks and purchases to third parties result in a profit for them. More users on the Cogi site means more potential homeware purchases. They want the information to be clear and intuitive and the site to be a friction-free experience. 
 
-### Navigation and Landing Page 
+---
 
+## User and Site owner goals, Data schema and planning
+
+### Navigation and Landing Page 
 The site’s homepage has a search index of recipes, with links to register or log in. The search searches the database on recipe title, ingredients and tags, the idea being the user will search for keywords such as ‘Italian’, ‘vegetarian’ etc. The menu options take the user through the key sections of the site and change if the user is logged in (they have the option to add a recipe and log out for example). I have created the site with conventional global navigation to suit the multiple user demographics and technical capabilities, as its better to stay within convention for intuitively. The navigation is responsive and at small devices includes a slider menu to make room for the website content. 
 The homepage includes a brief text about the company and their mission and links to external third-party cookware for sale. 
 ### View Recipe 
@@ -32,9 +35,9 @@ From benchmarking, these are staples of a recipe and should be on any recipe pag
 ### Add a Recipe
 Only a registered and logged in user can add a recipe. If a non-registered or non-logged in user clicks ‘Add recipe’ they are redirected to the register page where they can register or log in. This is so the site can gain more registered users. 
 ### Edit a Recipe
-Users can update recipes that they have created. They can do this from the recipe cards on their profile or from recipes displayed on the wider search. It has been defensively programmed so only the creator of the recipe can edit it.
+Users can update recipes that they have created, and only the creator of that recipe can edit it so it is defensively programmed. They can do this from the recipe cards on their profile or from recipes displayed on the wider search. It has been defensively programmed so only the creator of the recipe can edit it.
 ### Delete a Recipe
-Only the creator of the recipe can delete it and on delete are asked if they are sure they want to proceed – to mitigate any potential accidental deletes.
+A user can delete a recipe and on delete are asked if they are sure they want to proceed – to mitigate any potential accidental deletes.
 ### Add comments
 Registered users can comment on any recipe regardless of who created it. This is so the site offers members to create a dialogue on a recipe and build that community. If a user attempts to comment without being logged in, they are redirected to do so. 
 ### Search 
@@ -179,9 +182,12 @@ Headings, text, images and components are designed with a relevant size to work 
 Sources of design research came from Dribble, Pinterest and UXPlanet as well as competitor brands. 
 [UX Planet – Family recieps](https://uxplanet.org/roots-creating-a-platform-that-keeps-family-recipes-alive-5e747aae30b2)
 
-### Design 
+### Design and UI
+
 The initial design was created in Figma, with small iterations as it was built and tested as seen in the Skeleton section of this document. 
-### Colours
+
+A subtle colour palette has been deliberately used so the recipe cards have sufficient white space around them and the navigation stands out. The landing page image has been purposefully chosen as a minimal image with lots of white so the other elements stand out, the chopping board links to wanting to cook. Text, links, and navigation have consistent colours, change on hover and the typography is too. 
+
 ### Typography
 I used Google Font’s ‘Poppins’ as it is contemporary and stylish. Its lightweight, thin characters compliment the website aesthetic and work for titles as well as text. It’s sans-serif characters are legible and modest. I used a light font-weight too to compliment that contemporary aesthetic. 
 Different font sizes were used for the various heading types (H1, H2..etc) and text as hierarchy dictates. 
@@ -249,13 +255,13 @@ CSS: found no errors.
 
 I tested JavaScript while compiling using console.log to check if the code and functions were being called correctly. 
 
-### User Testing
+### User Story Testing
 
 The site has been tested on multiple device types and asked others to test it too. 
 
 Testers were able to intuitively search for and view recipes and/or register or log in and add, edit or delete their own recipes. They understood the legible text and how to navigate through the menu.
 
-First time user testing:
+First time user story testing:
 * I want to search for a recipe and follow it
 
 Users (registered and non-registered) can visit the homepage and search for a recipe immediately by recipe type, keyword or ingredient. From the results they can click to view a recipe on its own page. This shows an image, the prep-time, ingredients, method and any comments members have written about the recipe.
@@ -267,7 +273,7 @@ There are many ‘add recipe’ call to actions where a registered user can add 
 
 From the main menu a user can register and create an account. They are able to create a unique username and a secure password. When registered and logged in they are taken to their profile page which holds an add recipe button and recipes they have made. 
 
-Returning visitor testing: 
+Returning visitor story testing: 
 
 * I want to log in securely 
 
@@ -285,8 +291,6 @@ Users can register and create an account and add and later view their own recipe
 
 Each recipe page has a comment section so users can write their thoughts and feedback and create a dialogue. 
 
-
-
 ### Compatibility Testing
 Testing the accessibility with [Wave]( https://wave.webaim.org/) showed showed that the view buttons on recipe cards need to be more contrasting. It also notes that some heading sizes have been skipped this is because of the base template and what is needed on individual pages. 
 I tested the website on multiple browsers:
@@ -295,6 +299,7 @@ I tested the website on multiple browsers:
 * Internet Explorer
 * Safari
 It was also tested on multiple devices through Chrome DevTools with various mobile, iPads, tablets up to large screen monitors. 
+
 ### Performance testing 
 I used Google’s Page speed [Google page speed](https://developers.google.com/speed/pagespeed/insights/) to test the site speed for desktop and mobile, and used Google’s mobile friendly tester [Mobile tester](https://search.google.com/test/mobile-friendly)to determine it’s mobile performance level.
 
@@ -316,17 +321,17 @@ Lighthouse suggested using the rel=noopener attribute on external links for secu
 
 Bugs were picked up and tested throughout development. 
 
-Timezone is GMT and therefore behind an hour for the current time (BST!). 
+* Timezone is GMT and therefore behind an hour for the current time (BST!). 
 
-I tried to create add_comment functionality within the recipe method however I could not so I created its own add_comment method. This took a few iterations to correctly work within MongoDB. 
+* I tried to create add_comment functionality within the recipe method however I could not so I created its own add_comment method. This took a few iterations to correctly work within MongoDB. 
 
-There is a minor bug in Materialize’s row and column grid, where on a mobile screen there is a minor overhang to the right on the index page. 
+* There is a minor bug in Materialize’s row and column grid, where on a mobile screen there is a minor overhang to the right on the index page. 
 
-Tags – any more than 2 tags per recipe card skewes up the order and size, so I have included a for and if loop so only 2 appear. 
+* Tags – any more than 2 tags per recipe card skewes up the order and size, so I have included a for and if loop so only 2 appear. 
 
-The image sizes on recipe cards are forced to fit using CSS, depending on the users choice of image this may crop or cut unsightly. 
+* The image sizes on recipe cards are forced to fit using CSS, depending on the users choice of image this may crop or cut unsightly. 
 
-Image url takes a string and has no web address check or validation 
+* Image url takes a string and has no web address check or validation 
 
 --- 
 ## Deployment 
