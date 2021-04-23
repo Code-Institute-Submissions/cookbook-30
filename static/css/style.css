@@ -35,7 +35,6 @@ body {
         position: fixed;
         left: 0px;
         width: auto;
-        height: 100vh;
         z-index: -1;
         background-position-x: 0;
     }
@@ -121,6 +120,12 @@ body {
 
 .welcome {
     font-size: 2rem;
+}
+
+/*  ---------------------- * Create and edit recipe */ 
+
+.action {
+    padding: 30px 0px;
 }
 
 /*  ---------------------- * Recipe cards and results */ 
