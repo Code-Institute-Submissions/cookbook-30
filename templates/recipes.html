@@ -25,7 +25,7 @@
     <div class="row">
         <!-- Add recipe button-->
         {% if recipes|length > 0 %}
-            <div class="col s12 m6 create-recipe">
+            <div class="col s12 m6 l4 create-recipe">
                 <a href="{{ url_for('add_recipe') }}">
                     <i class="fas fa-plus"></i>  
                     <p><strong>Add new recipe</strong></p>
@@ -33,7 +33,7 @@
             </div>
             <!-- Show all recipes in database -->
             {% for recipe in recipes %}
-                <div class="col s12 m6">
+                <div class="col s12 m6 l4">
                     <!-- Recipe card -->
                     <div class="card">
                         <!-- Recipe image -->
