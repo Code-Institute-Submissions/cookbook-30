@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col s12 m8 offset-m2">
             <div class="card-panel">
-                <h3 class="center-align">
+                <h3 class="center-align welcome">
                     {{ username }}'s recipes
                 </h3>
             </div>
@@ -16,7 +16,7 @@
     <!-- Recipes -->
     <div class="row">
         <!-- Add recipe button -->
-        <div class="col s12 m4 create-recipe">
+        <div class="col s12 m6 l4 create-recipe">
             <a href="{{ url_for('add_recipe') }}">
                 <i class="fas fa-plus"></i>  
                 <p><strong>Add new recipe</strong></p>
@@ -25,7 +25,7 @@
         <!-- Recipes only created by the logged in user shown in cards -->
         {% for recipe in recipes %}
             {% if session.user|lower == recipe.created_by|lower %}
-                <div class="col s12 m4">
+                <div class="col s12 m6 l4">
                     <!-- Link to recipe page -->
                     <a href="{{ url_for('recipe', recipe_id=recipe._id) }}">
                         <div class="card">
