@@ -332,7 +332,7 @@ Bugs were picked up and tested throughout development.
 
 * I tried to create add_comment functionality within the recipe method however I could not so I created its own add_comment method. This took a few iterations to correctly work within MongoDB. 
 
-* There is a minor bug in Materialize’s row and column grid, where on a mobile screen there is a minor overhang to the right on the index page. 
+* There was a logical bug in CSS which caused a misalignment of the index page, but it has since been centered. 
 
 * Tags – any more than 2 tags per recipe card skewes up the order and size, so I have included a for and if loop so only 2 appear. 
 
