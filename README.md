@@ -41,14 +41,18 @@ A user can delete a recipe and on delete are asked if they are sure they want to
 ### Add comments
 Registered users can comment on any recipe regardless of who created it. This is so the site offers members to create a dialogue on a recipe and build that community. If a user attempts to comment without being logged in, they are redirected to do so. 
 ### Search 
-The search function has been created with a text index on the recipe collection, on recipe names, ingredients, and tags as per common recipe searches use cases with users searching by a key word or ingredient to generate ideas. 
+The search function has been created with a text index on the recipe collection, on recipe names, ingredients, and tags as per common recipe searches use cases with users searching by a key word or ingredient to generate ideas. The recipe card click actions are different on a profile than on the all recipes search. This is so a creator of that recipe can see which is theres from the edit button, and for consistency have kept a view button in line with an edit button. 
 If there are no search results, a flash messages displays notifying the user and offers to add a recipe – a subtle UX trick to aim for increased recipes and engagement. 
 ### Data Schema
 3 collections were created using a non-relational database MongoDB; recipes, users and comments. Comments includes the recipe ID so that comments about a particular recipe are shown on the page. 
 ### Register, Log in and Out 
 Users can register, log in and out securely. 
+### Profile 
+When logging in a user is taken to their profile page, with a welcome flash message and shown the recipes that they have created. 
 ### Footer and links to homeware 
 Each page has a footer with contact details of the company and social media links that open in a new tab. 
+
+All CRUD actions have been manually tested and checked in the database to ensure they are saving correctly which they are. This was done throughout development to ensure the data types were correct and code was written correctly. Users were asked to add their own test recipes to ensure it was fully usable.
 
 ---
 ## User Experience (UX)
@@ -239,6 +243,9 @@ As per the UX strategy scope, I think the site would be improved with follow alo
 ---
 ## Testing
 ### Functionality 
+
+All CRUD actions have been tested on the site and in the database by myself and some test users. The informtion saves correctly in the database and is visable on the site correctly via the db.
+
 All navigation, create recipe, edit, delete, log in and out and registration links have been checked and they all work correctly. 
 
 Social media and third-party links all take the user to a new tab and have been checked. 
