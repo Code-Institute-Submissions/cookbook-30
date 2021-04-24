@@ -35,7 +35,7 @@
         </div>
         <!-- Side menu for mobile and tablet devices-->
         <ul class="sidenav" id="mobile-demo">
-            <li><h4 class="center-align">cogi</h4></li>
+            <li><a href="{{ url_for('index') }}" class="brand-logo"><h4 class="center-align">cogi</h4></a></li>
             <li><a href="{{ url_for('index') }}">Home</a></li>
             {% if session.user %}
                 <li><a href="{{ url_for('profile', username=session['user']) }}">My Account</a></li>
