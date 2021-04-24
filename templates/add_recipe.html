@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3 class="center-align">Create recipe</h3>
+    <h3 class="center-align action">Create recipe</h3>
     <div class="row">
         <form class="col s12" method="POST" action="{{ url_for('add_recipe') }}">
             <!-- Recipe name input -->
@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-pepper-hot prefix"></i>
-                    <textarea id="ingredients" class="materialize-textarea" name="ingredients" rows="16" cols="40" required></textarea>
+                    <textarea id="ingredients" class="materialize-textarea" name="ingredients" rows="20" cols="40" required></textarea>
                     <label for="ingredients">Ingredients (Please insert one per line Eg. 100g Flour)</label>
                 </div>
             </div>
@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-align-left prefix"></i>
-                    <textarea id="method" class="materialize-textarea" name="method" rows="16" cols="80" required></textarea>
+                    <textarea id="method" class="materialize-textarea" name="method" rows="20" cols="80" required></textarea>
                     <label for="method">Method (Please write one step per line)</label>
                 </div>
             </div>
@@ -42,7 +42,10 @@
                 <div class="col s12 input-field" >
                     <i class="fas fa-tags prefix"></i>
                     <textarea id="tags" name="tags" class="materialize-textarea" type="text" required></textarea>
-                    <label for="tags">Type keywords (separated by a comma). Eg. Italian or Snack, Brunch. These will appear as tags.</label>
+                    <label for="tags">Type keywords</label>
+                    <span class="helper-text" data-error="wrong" data-success="right">
+                        Eg. Italian or Snack, Brunch (separated by a comma). These will appear as tags.
+                    </span>
                 </div>
             </div>
             <!-- Recipe image request a URL from user -->

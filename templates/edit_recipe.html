@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3 class="center-align">Update recipe</h3>
+    <h3 class="center-align action">Update recipe</h3>
     <div class="row">
         <form class="col s12" method="POST" action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
             <!-- Recipe name input -->
@@ -17,10 +17,10 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-pepper-hot prefix"></i>
-                    <textarea id="ingredients" class="materialize-textarea" name="ingredients" rows="16" cols="40" required>
+                    <textarea id="ingredients" class="materialize-textarea" name="ingredients" rows="16" cols="80" required>
                         {{- recipe.ingredients -}}
                     </textarea>
-                    <label for="ingredients">Ingredients</label>
+                    <label for="ingredients">Ingredients (Please insert one per line Eg. 100g Flour)</label>
                 </div>
             </div>
             <!-- Method text field -->
@@ -30,7 +30,7 @@
                     <textarea id="method" class="materialize-textarea" name="method" rows="16" cols="80" required>
                         {{- recipe.method -}}
                     </textarea>
-                    <label for="method">Method</label>
+                    <label for="method">Method (Please write one step per line)</label>
                 </div>
             </div>
             <!-- Time for cooking prep text field -->
@@ -50,7 +50,10 @@
                     <textarea id="tags" name="tags" class="materialize-textarea" type="text" required>
                         {{- recipe.tags|join(", ") -}}
                     </textarea>
-                    <label for="tags">Type keywords (separated by a comma). Eg. Italian or Snack, Brunch. These will appear as tags.</label>
+                    <label for="tags">Type keywords</label>
+                    <span class="helper-text" data-error="wrong" data-success="right">
+                        Eg. Italian or Snack, Brunch (separated by a comma). These will appear as tags.
+                    </span>
                 </div>
             </div>
             <!-- Recipe image request URL -->
